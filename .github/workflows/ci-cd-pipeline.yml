@@ -41,6 +41,6 @@ jobs:
     - name: Update Kubernetes deployment
       run: |
         # Configurar kubectl para usar o cluster EKS
-        aws eks --region ca-central-1 update-kubeconfig --name my-cluster-name
+        aws eks --region ca-central-1 update-kubeconfig --name EKSDeepDive
         # Aplicar o Deployment no EKS
         kubectl apply -f deployment.yaml
