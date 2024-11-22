@@ -21,7 +21,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: ca-central-1  # Especifique a região do seu EKS
+        aws-region: ca-central-1  # Corrigido para 'aws-region'
 
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
