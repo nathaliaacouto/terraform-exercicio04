@@ -16,8 +16,19 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: ca-central-1  # Especifique a região do seu EKS
+
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
+      with:
+        mask-password: false
+        registry-type: private
+        skip-logout: false
 
     - name: Build Docker image
       run: |
@@ -26,13 +37,6 @@ jobs:
     - name: Push Docker image to Amazon ECR
       run: |
         docker push 325583868777.dkr.ecr.ca-central-1.amazonaws.com/mcc2_nvc_dp008:latest
-
-    - name: Set up AWS CLI
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: ca-central-1
 
     - name: Update Kubernetes deployment
       run: |
