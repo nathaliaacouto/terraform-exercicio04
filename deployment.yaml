@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcc2-nvc-deployment-dp008
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: mcc2-nvc-container-dp008
+        image: 325583868777.dkr.ecr.ca-central-1.amazonaws.com/mcc2_nvc_dp008:latest
+        ports:
+        - containerPort: 8080
